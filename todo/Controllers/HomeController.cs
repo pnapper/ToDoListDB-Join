@@ -8,13 +8,13 @@ namespace ToDoList.Controllers
     public class HomeController : Controller
     {
 
-        [Route("/")]
+        [HttpGet("/")]
         public ActionResult Index()
         {
             return View();
         }
 
-        [Route("/task/list")]
+        [HttpGet("/task/list")]
         public ActionResult TaskList()
         {
           List<Task> allTasks = Task.GetAll();
@@ -24,16 +24,18 @@ namespace ToDoList.Controllers
         [HttpPost("/task/create")]
         public ActionResult CreateTask()
         {
-          Task newTask = new Task (Request.Form["new-task"]);
+          Task newTask = new Task (
+          Request.Form["new-task"]
+          );
           newTask.Save();
           return View(newTask);
         }
 
-        [HttpPost("/task/list/clear")]
-        public ActionResult TaskListClear()
-        {
-            Task.ClearAll();
-            return View();
-        }
+        // [HttpPost("/task/list/clear")]
+        // public ActionResult TaskListClear()
+        // {
+        //     // Task.ClearAll();
+        //     return View();
+        // }
     }
 }
